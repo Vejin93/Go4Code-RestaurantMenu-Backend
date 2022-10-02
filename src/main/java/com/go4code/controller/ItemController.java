@@ -72,6 +72,7 @@ public class ItemController {
     @RequestMapping(value = "api/items/{id}", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ItemDTO> update(@PathVariable Long id,
                                              @RequestBody ItemDTO itemDTO) {
+
         Item item = itemService.findById(id);
         if (item == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -80,6 +81,7 @@ public class ItemController {
         item.setId(id);
         item.setName(itemDTO.getName());
         item.setCategory(itemDTO.getCategory());
+        item.setPrice(itemDTO.getPrice());
         item = itemService.save(item);
 
         return new ResponseEntity<>(new ItemDTO(item), HttpStatus.OK);

@@ -1,5 +1,7 @@
 package com.go4code.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 @Entity
@@ -10,7 +12,8 @@ public class Item {
     private Long id;
     @Column(nullable = false)
     private String name;
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.REFRESH)
+    @JsonIgnore
     private Category category;
     @Column
     private int price;
